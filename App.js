@@ -7,6 +7,7 @@ class App extends React.Component {
     this.state = {
       txt: "This is txt State!"
     }
+    this.update = this.update.bind(this)
   }
   update(e) {
     this.setState({txt: e.target.value})
@@ -16,7 +17,7 @@ class App extends React.Component {
     let cat = this.props.cat
     return (
       <div>
-        <input type="text" onChange={this.update.bind(this)} />
+        <input type="text" onChange={this.update} value={txt}/>
         <h1>{cat} - {txt}</h1>
       </div>
     )
