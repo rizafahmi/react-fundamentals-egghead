@@ -1,9 +1,12 @@
 import React from 'react'
 
-class App extends React.Component {
-  render() {
-    return <div>Hi</div>
-  }
-}
+// class App extends React.Component {
+//   render() {
+//     return <h1>Hi</h1>
+//   }
+// }
+
+// Stateless function
+const App = () => <h1>Hello EggHead</h1>
 
 export default App
