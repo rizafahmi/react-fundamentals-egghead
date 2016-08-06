@@ -17,11 +17,21 @@ class App extends React.Component {
     let cat = this.props.cat
     return (
       <div>
-        <input type="text" onChange={this.update} value={txt}/>
-        <h1>{cat} - {txt}</h1>
+        <Widget txt={this.state.txt} update={this.update} />
+        <Widget txt={this.state.txt} update={this.update} />
+        <Widget txt={this.state.txt} update={this.update} />
       </div>
     )
   }
+}
+
+const Widget = (props) => {
+  return (
+    <div>
+      <input type="text" onChange={props.update} value={props.txt}/>
+      <h1>{props.txt}</h1>
+    </div>
+  )
 }
 
 App.defaultProps = {
