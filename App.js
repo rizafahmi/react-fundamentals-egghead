@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 
 // class App extends React.Component {
 //   render() {
@@ -9,4 +10,4 @@ import React from 'react'
 // Stateless function
 const App = () => <h1>Hello EggHead</h1>
 
-export default App
+ReactDOM.render(<App />, document.getElementById('app'))
