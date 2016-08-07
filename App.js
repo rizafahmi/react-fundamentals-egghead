@@ -2,21 +2,54 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      val: 0
+    }
+    this.update = this.update.bind(this)
+  }
+  update() {
+    this.setState({
+      val: this.state.val + 1
+    })
+  }
+  componentWillMount() {
+    console.log("Mounting!")
+  }
+  componentDidMount() {
+    console.log("Mounted")
+  }
+  componentWillUnmount() {
+    console.log("Bye!")
+  }
   render() {
+    console.log("rendering!")
     return (
-      <Button>I <Heart/> React</Button>
+      <button onClick={this.update}>{this.state.val}</button>
     )
   }
 }
 
-class Button extends React.Component {
+class Wrapper extends React.Component {
+  constructor() {
+    super()
+  }
+  mount() {
+    ReactDOM.render(<App />, document.getElementById('a'))
+  }
+  unmount() {
+    ReactDOM.unmountComponentAtNode(document.getElementById('a'))
+  }
   render() {
     return (
-      <button>{this.props.children}</button>
+      <div>
+        <button onClick={this.mount.bind(this)}>Mount</button>
+        <button onClick={this.unmount.bind(this)}>Unmount</button>
+        <div id="a"></div>
+      </div>
     )
   }
 }
 
-const Heart = () => <span> &lt;3 </span>
-
-ReactDOM.render(<App cat={1} />, document.getElementById('app'))
+ReactDOM.render(<Wrapper />, document.getElementById('app'))
