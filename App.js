@@ -4,21 +4,41 @@ import ReactDOM from 'react-dom'
 class App extends React.Component {
   constructor() {
     super()
-    this.state = {data: [
-      {id: 1, name: "Eric Baily"},
-      {id: 2, name: "Henrik Mickitarian"},
-      {id: 3, name: "Zlatan Ibrahimovic"},
-      {id: 4, name: "Paul Pogba"}
-    ]}
-  }
+    this.state = {
+      input: '/* add your jsx here */',
+      output: '',
+      err: ''
+    }
+    this.update = this.update.bind(this)
 
+  }
+  update(e) {
+    let code = e.target.value
+
+    try {
+      this.setState({
+        output: babel.transform(code, {
+          stage: 0,
+          loose: 'all'
+        }).code,
+        err: ''
+      })
+    } catch(err) {
+      this.setState({err: err.message})
+    }
+  }
   render() {
-    let rows = this.state.data.map( person => {
-      return <PersonRow key={person.id} data={person} />
-    })
-    return <table>
-      <tbody>{rows}</tbody>
-      </table>
+    return (
+      <div>
+        <header>{this.state.err}</header>
+        <div className="container">
+          <textarea onChange={this.update} defaultValue={this.state.input}></textarea>
+          <pre>
+            {this.state.output}
+          </pre>
+        </div>
+      </div>
+    )
   }
 }
 
